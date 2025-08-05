@@ -1,0 +1,72 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\natha\\Documents\\GitHub\\mywebsite\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{225152FE-DAEE-4E6B-86CF-B9B7864B593E}|mywebsite\\mywebsite.csproj|c:\\users\\natha\\documents\\github\\mywebsite\\mywebsite\\content\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{225152FE-DAEE-4E6B-86CF-B9B7864B593E}|mywebsite\\mywebsite.csproj|solutionrelative:mywebsite\\content\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{225152FE-DAEE-4E6B-86CF-B9B7864B593E}|mywebsite\\mywebsite.csproj|c:\\users\\natha\\documents\\github\\mywebsite\\mywebsite\\source\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{225152FE-DAEE-4E6B-86CF-B9B7864B593E}|mywebsite\\mywebsite.csproj|solutionrelative:mywebsite\\source\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{225152FE-DAEE-4E6B-86CF-B9B7864B593E}|mywebsite\\mywebsite.csproj|c:\\users\\natha\\documents\\github\\mywebsite\\mywebsite\\content\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{225152FE-DAEE-4E6B-86CF-B9B7864B593E}|mywebsite\\mywebsite.csproj|solutionrelative:mywebsite\\content\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Users\\natha\\Documents\\GitHub\\mywebsite\\mywebsite\\Content\\index.html",
+              "RelativeDocumentMoniker": "mywebsite\\Content\\index.html",
+              "ToolTip": "C:\\Users\\natha\\Documents\\GitHub\\mywebsite\\mywebsite\\Content\\index.html",
+              "RelativeToolTip": "mywebsite\\Content\\index.html",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAACMAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-08-05T08:37:39.856Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "style.css",
+              "DocumentMoniker": "C:\\Users\\natha\\Documents\\GitHub\\mywebsite\\mywebsite\\Content\\style.css",
+              "RelativeDocumentMoniker": "mywebsite\\Content\\style.css",
+              "ToolTip": "C:\\Users\\natha\\Documents\\GitHub\\mywebsite\\mywebsite\\Content\\style.css",
+              "RelativeToolTip": "mywebsite\\Content\\style.css",
+              "ViewState": "AgIAALcAAAAAAAAAAAAqwMwAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-08-05T10:03:34.779Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\natha\\Documents\\GitHub\\mywebsite\\mywebsite\\source\\Program.cs",
+              "RelativeDocumentMoniker": "mywebsite\\source\\Program.cs",
+              "ToolTip": "C:\\Users\\natha\\Documents\\GitHub\\mywebsite\\mywebsite\\source\\Program.cs",
+              "RelativeToolTip": "mywebsite\\source\\Program.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAkwFgAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T20:04:13.623Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
