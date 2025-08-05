@@ -13,6 +13,11 @@ jobs:
       - name: Checkout main branch
         uses: actions/checkout@v3
 
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x
+
       - name: Build site
         run: dotnet run --project mywebsite/mywebsite.csproj
 
@@ -21,4 +26,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: public
-          publish_branch: gh-pages
+          publish_branch: github-pages
