@@ -12,6 +12,9 @@ internal class Program
 
     const string ReplaceThisWithProjectLinks = "<!-- Project Links Here -->";
 
+    const string ReplaceThisWithBlogTitle = "<!-- Blog Title Here -->";
+
+
     const string DefaultTemplate = "Content/Templates/Default.html";
     const string PublishPath = "public";
 
@@ -100,19 +103,43 @@ internal class Program
         blogName = blogName.Remove(0, 4); // remove numbers and spacing
         Console.WriteLine("current blog: " + blogName);
 
-        string content = File.ReadAllText(Path.Combine(BlogDirectory, "index.md"));
-        content = Markdown.ToHtml(content);
+        string mdPath = Path.Combine(BlogDirectory, "index.md");
+        string markdown = File.ReadAllText(mdPath);
+
+        string description = unmodifiedBlogName;
+        var match = Regex.Match(markdown, @"^DESCRIPTION:\s*(.+)$", RegexOptions.Multiline);
+        if (match.Success)
+        {
+            description = match.Groups[1].Value.Trim();
+
+            // remove the description
+            markdown = Regex.Replace(markdown, @"^DESCRIPTION:\s*.+\r?\n?", "", RegexOptions.Multiline);
+        }
+
+        string title = blogName;
+
+        var titleMatch = Regex.Match(markdown, @"^TITLE:\s*(.+)$", RegexOptions.Multiline);
+        if (titleMatch.Success)
+        {
+            title = titleMatch.Groups[1].Value.Trim();
+            markdown = Regex.Replace(markdown, @"^TITLE:\s*.+\r?\n?", "", RegexOptions.Multiline);
+        }
+
+        string content = Markdown.ToHtml(markdown);
         string template = File.ReadAllText(DefaultTemplate);
 
-        string html = template.Replace(ReplaceThisWithBlogContent, content);
-        string outputPath = Path.Combine(PublishPath, Path.Combine("Blogs", unmodifiedBlogName, "index.html"));
+        string html = template
+            .Replace(ReplaceThisWithBlogTitle, $"<div class=\"blog-title\"><h1>{title}</h1></div>")
+            .Replace(ReplaceThisWithBlogContent, content);
+
+        string outputPath = Path.Combine(PublishPath, "Blogs", unmodifiedBlogName, "index.html");
         Directory.CreateDirectory(Path.Combine(PublishPath, "Blogs", unmodifiedBlogName));
         File.WriteAllText(outputPath, html);
 
         Blogs.Add(new Blog()
         {
             Name = blogName,
-            Description = unmodifiedBlogName,
+            Description = description,
             UnmodifiedName = unmodifiedBlogName,
         });
     }
