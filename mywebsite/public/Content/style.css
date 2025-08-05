@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+/* Basic Reset */
+* {
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #fafafa;
+    color: #333;
+    line-height: 1.6;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header Styling */
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1rem;
+}
+
+/* Logo stays left */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+    .logo img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #3b8560;
+    }
+
+    .logo h1 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+        .logo h1 a {
+            color: #2a4d32;
+            text-decoration: none;
+        }
+
+/* Nav links to the right */
+nav {
+    display: flex;
+    gap: 1rem;
+}
+
+    nav a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        transition: color 0.3s ease;
+    }
+
+        nav a img {
+            width: 20px;
+            height: 20px;
+        }
+
+        nav a:hover {
+            color: #23633f;
+        }
+
+/* Navigation Links */
+nav {
+    display: flex;
+    align-items: center; /* <-- This aligns the icons vertically with the logo */
+    gap: 1rem;
+}
+
+    nav a {
+        color: #3b8560;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        transition: color 0.3s ease;
+    }
+
+        nav a img {
+            width: 20px;
+            height: 20px;
+        }
+
+        nav a:hover {
+            color: #23633f;
+        }
+
+/* Main Content */
+main {
+    text-align: left;
+    margin-bottom: 3rem;
+}
+
+.intro {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #2a4d32;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.sub-intro {
+    font-weight: 400;
+    font-size: 1rem;
+    color: #536d4f;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.blog-title {
+    color: #2a4d32;
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Blog List Styling */
+.blog-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .blog-list li {
+        border-bottom: 1px solid #ddd;
+        padding: 1.25rem 0;
+    }
+
+        .blog-list li:last-child {
+            border-bottom: none;
+        }
+
+    .blog-list a.title {
+        font-weight: 600;
+        color: #3b8560;
+        font-size: 1.1rem;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+        .blog-list a.title:hover {
+            color: #23633f;
+            text-decoration: underline;
+        }
+
+    .blog-list p {
+        margin: 0.5rem 0 0;
+        color: #555;
+        font-size: 0.95rem;
+    }
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    margin-top: 4rem;
+    color: #888;
+    font-size: 0.9rem;
+    border-top: 1px solid #ddd;
+    padding-top: 1rem;
+}
+
+/* Responsive Styling */
+@media (max-width: 500px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    nav {
+        justify-content: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .logo h1 {
+        font-size: 1.25rem;
+    }
+}
