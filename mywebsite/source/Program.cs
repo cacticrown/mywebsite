@@ -73,18 +73,25 @@ internal class Program
         });
     }
 
-    static void HomeSite() 
+    static void HomeSite()
     {
         string html = File.ReadAllText("Content/index.html");
-        string htmlWithBlogLinks = "";
+        string htmlWithBlogLinks = @"<div class=""blog-grid"">";
 
-        foreach(var blog in Blogs)
+        foreach (var blog in Blogs)
         {
-            htmlWithBlogLinks += $"<li>\r\n<a href=\"Blogs/{blog.UnmodifiedName}/index.html\" class=\"title\">{blog.Name}</a>\r\n<p>{blog.Description}</p>\r\n</li>";
+            htmlWithBlogLinks += $@"
+<a href=""Blogs/{blog.UnmodifiedName}/index.html"" class=""blog-card-link"">
+    <div class=""blog-card"">
+        <span class=""title"">{blog.Name}</span>
+        <p>{blog.Description}</p>
+    </div>
+</a>";
         }
 
-        html = html.Replace(ReplaceThisWithBlogLinks, htmlWithBlogLinks);
+        htmlWithBlogLinks += "</div>";
 
+        html = html.Replace(ReplaceThisWithBlogLinks, htmlWithBlogLinks);
         File.WriteAllText(Path.Combine(PublishPath, "index.html"), html);
     }
 
