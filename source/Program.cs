@@ -16,7 +16,6 @@ internal class Program
 
     static void Main()
     {
-
         var root = GetProjectRoot();
         Directory.SetCurrentDirectory(root);
 
