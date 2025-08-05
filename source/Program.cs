@@ -9,10 +9,14 @@ internal class Program
 {
     const string ReplaceThisWithBlogContent = "<!-- Blog Content Here -->";
     const string ReplaceThisWithBlogLinks = "<!-- Blog Links Here -->";
+
+    const string ReplaceThisWithProjectLinks = "<!-- Project Links Here -->";
+
     const string DefaultTemplate = "Content/Templates/Default.html";
     const string PublishPath = "public";
 
     static List<Blog> Blogs = new List<Blog>();
+    static List<Project> Projects = new List<Project>();
 
     static void Main()
     {
@@ -39,6 +43,11 @@ internal class Program
             Console.WriteLine("ERROR: 'Content/index.html' does not exist.");
             return;
         }
+        if (!Directory.Exists("Content/Projects"))
+        {
+            Console.WriteLine("ERROR: 'Content/Projects' does not exist.");
+            return;
+        }
         Console.WriteLine("all tests passed");
 
         if (Directory.Exists(PublishPath))
@@ -50,25 +59,38 @@ internal class Program
             WriteBlog(directory);
         }
 
+        foreach (var directory in Directory.GetFiles("Content/Projects"))
+        {
+            WriteProject(directory);
+        }
+
         HomeSite();
         CopyContent();
     }
 
-    static void CopyContent()
+    static void WriteProject(string projectDirectory)
     {
-        if (!Directory.Exists(Path.Combine(PublishPath, "Content")))
+        string unmodifiedProjectName = Path.GetFileName(projectDirectory);
+        string projectName = unmodifiedProjectName.Remove(0, 3).Replace(".md", ""); // remove number
+
+        Console.WriteLine("current project: " + projectName);
+
+        string[] splitContent = File.ReadAllText(projectDirectory).Split("\n");
+
+        string url = splitContent[0];
+        string description = string.Empty;
+        if(splitContent.Length > 1)
         {
-            Directory.CreateDirectory(Path.Combine(PublishPath, "Content"));
+            description = splitContent[1];
         }
 
-        foreach(var file in Directory.GetFiles("Content", "", SearchOption.AllDirectories))
+
+        Projects.Add(new Project
         {
-            if(Path.GetExtension(file) != ".html" && Path.GetExtension(file) != ".md")
-            {
-                Console.WriteLine("copying content: " + file);
-                File.Copy(file, Path.Combine(PublishPath, file));
-            }
-        }
+            Name = projectName,
+            Description = description,
+            Url = url,
+        });
     }
 
     static void WriteBlog(string BlogDirectory)
@@ -95,10 +117,29 @@ internal class Program
         });
     }
 
+    static void CopyContent()
+    {
+        if (!Directory.Exists(Path.Combine(PublishPath, "Content")))
+        {
+            Directory.CreateDirectory(Path.Combine(PublishPath, "Content"));
+        }
+
+        foreach (var file in Directory.GetFiles("Content", "", SearchOption.AllDirectories))
+        {
+            if (Path.GetExtension(file) != ".html" && Path.GetExtension(file) != ".md")
+            {
+                Console.WriteLine("copying content: " + file);
+                File.Copy(file, Path.Combine(PublishPath, file));
+            }
+        }
+    }
+
     static void HomeSite()
     {
         string html = File.ReadAllText("Content/index.html");
         string htmlWithBlogLinks = @"<div class=""blog-grid"">";
+
+        // Blogs
 
         foreach (var blog in Blogs)
         {
@@ -114,6 +155,27 @@ internal class Program
         htmlWithBlogLinks += "</div>";
 
         html = html.Replace(ReplaceThisWithBlogLinks, htmlWithBlogLinks);
+
+        // Projects
+        string htmlWithProjectLinks = @"<div class=""blog-grid"">";
+
+        foreach (var project in Projects)
+        {
+            htmlWithProjectLinks += $@"
+<a href=""{project.Url}"" class=""blog-card-link"" target=""_blank"">
+    <div class=""blog-card"">
+        <span class=""title"">{project.Name}</span>
+        <p>{project.Description}</p>
+    </div>
+</a>";
+        }
+
+        htmlWithProjectLinks += "</div>";
+
+        html = html.Replace(ReplaceThisWithProjectLinks, htmlWithProjectLinks);
+
+
+
         File.WriteAllText(Path.Combine(PublishPath, "index.html"), html);
     }
 
