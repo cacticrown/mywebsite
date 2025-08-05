@@ -16,6 +16,10 @@ internal class Program
 
     static void Main()
     {
+
+        var root = GetProjectRoot();
+        Directory.SetCurrentDirectory(root);
+
         if (!Directory.Exists("Content"))
         {
             Console.WriteLine("ERROR: 'Content' directory does not exist.");
@@ -36,10 +40,7 @@ internal class Program
             Console.WriteLine("ERROR: 'Content/index.html' does not exist.");
             return;
         }
-        Console.WriteLine("test");
-
-        var root = GetProjectRoot();
-        Directory.SetCurrentDirectory(root);
+        Console.WriteLine("all tests passed");
 
         if (Directory.Exists(PublishPath))
             Directory.Delete(PublishPath, true);
