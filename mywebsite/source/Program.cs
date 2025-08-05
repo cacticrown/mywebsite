@@ -16,6 +16,28 @@ internal class Program
 
     static void Main()
     {
+        if (!Directory.Exists("Content"))
+        {
+            Console.WriteLine("ERROR: 'Content' directory does not exist.");
+            return;
+        }
+        if (!File.Exists(DefaultTemplate))
+        {
+            Console.WriteLine($"ERROR: Template file '{DefaultTemplate}' does not exist.");
+            return;
+        }
+        if (!Directory.Exists("Content/Blogs"))
+        {
+            Console.WriteLine("ERROR: 'Content/Blogs' directory does not exist.");
+            return;
+        }
+        if (!File.Exists("Content/index.html"))
+        {
+            Console.WriteLine("ERROR: 'Content/index.html' does not exist.");
+            return;
+        }
+        Console.WriteLine("test");
+
         var root = GetProjectRoot();
         Directory.SetCurrentDirectory(root);
 
