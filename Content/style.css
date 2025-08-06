@@ -170,21 +170,37 @@ main {
 
 /* Blog Card Design */
 .blog-card {
-    border: 2px solid #ccc;
-    border-radius: 8px;
+    border: 1px solid #ccc;
     padding: 16px;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 12px;
+    border-radius: 8px;
     background-color: #fff;
-    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 150px;
 }
 
     .blog-card .title {
         font-size: 1.2em;
         font-weight: bold;
-        color: #333;
-        display: block;
         margin-bottom: 8px;
     }
+
+    .blog-card .description {
+        flex-grow: 1;
+    }
+
+.date-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+}
+
+.blog-card .date {
+    font-size: 0.9em;
+    color: #666;
+}
 
     .blog-card p {
         color: #666;
@@ -219,4 +235,9 @@ footer {
     .logo h1 {
         font-size: 1.25rem;
     }
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
