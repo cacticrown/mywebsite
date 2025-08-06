@@ -111,18 +111,23 @@ internal class Program
         if (match.Success)
         {
             description = match.Groups[1].Value.Trim();
-
-            // remove the description
             markdown = Regex.Replace(markdown, @"^DESCRIPTION:\s*.+\r?\n?", "", RegexOptions.Multiline);
         }
 
         string title = blogName;
-
         var titleMatch = Regex.Match(markdown, @"^TITLE:\s*(.+)$", RegexOptions.Multiline);
         if (titleMatch.Success)
         {
             title = titleMatch.Groups[1].Value.Trim();
             markdown = Regex.Replace(markdown, @"^TITLE:\s*.+\r?\n?", "", RegexOptions.Multiline);
+        }
+
+        string date = "Unknown Date";
+        var dateMatch = Regex.Match(markdown, @"^DATE:\s*(.+)$", RegexOptions.Multiline);
+        if (dateMatch.Success)
+        {
+            date = dateMatch.Groups[1].Value.Trim();
+            markdown = Regex.Replace(markdown, @"^DATE:\s*.+\r?\n?", "", RegexOptions.Multiline);
         }
 
         string content = Markdown.ToHtml(markdown);
@@ -132,16 +137,29 @@ internal class Program
             .Replace(ReplaceThisWithBlogTitle, $"<div class=\"blog-title\"><h1>{title}</h1></div>")
             .Replace(ReplaceThisWithBlogContent, content);
 
-        string outputPath = Path.Combine(PublishPath, "Blogs", unmodifiedBlogName, "index.html");
-        Directory.CreateDirectory(Path.Combine(PublishPath, "Blogs", unmodifiedBlogName));
-        File.WriteAllText(outputPath, html);
+        string destinationDir = Path.Combine(PublishPath, "Blogs", unmodifiedBlogName);
+        Directory.CreateDirectory(destinationDir);
+        File.WriteAllText(Path.Combine(destinationDir, "index.html"), html);
 
         Blogs.Add(new Blog()
         {
             Name = blogName,
             Description = description,
             UnmodifiedName = unmodifiedBlogName,
+            Date = date,
         });
+
+        foreach (string filePath in Directory.GetFiles(BlogDirectory, "*", SearchOption.AllDirectories))
+        {
+            if (Path.GetFileName(filePath).Equals("index.md", StringComparison.OrdinalIgnoreCase))
+                continue;
+
+            string relativePath = Path.GetRelativePath(BlogDirectory, filePath);
+            string destPath = Path.Combine(destinationDir, relativePath);
+
+            Directory.CreateDirectory(Path.GetDirectoryName(destPath));
+            File.Copy(filePath, destPath, true);
+        }
     }
 
     static void CopyContent()
@@ -151,10 +169,14 @@ internal class Program
             Directory.CreateDirectory(Path.Combine(PublishPath, "Content"));
         }
 
-        foreach (var file in Directory.GetFiles("Content", "", SearchOption.AllDirectories))
+        foreach (var file in Directory.GetFiles("Content", "", SearchOption.TopDirectoryOnly))
         {
             if (Path.GetExtension(file) != ".html" && Path.GetExtension(file) != ".md")
             {
+                if (!Directory.Exists(Path.Combine(PublishPath, Path.GetDirectoryName(file))))
+                {
+                    Directory.CreateDirectory(Path.Combine(PublishPath, Path.GetDirectoryName(file)));
+                }
                 Console.WriteLine("copying content: " + file);
                 File.Copy(file, Path.Combine(PublishPath, file));
             }
@@ -174,7 +196,10 @@ internal class Program
 <a href=""Blogs/{blog.UnmodifiedName}/index.html"" class=""blog-card-link"">
     <div class=""blog-card"">
         <span class=""title"">{blog.Name}</span>
-        <p>{blog.Description}</p>
+        <p class=""description"">{blog.Description}</p>
+        <div class=""date-container"">
+            <span class=""date"">{blog.Date}</span>
+        </div>
     </div>
 </a>";
         }
